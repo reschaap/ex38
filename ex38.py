@@ -1,3 +1,4 @@
+# as example only 
 from sys import exit
 
 def gold_room():
