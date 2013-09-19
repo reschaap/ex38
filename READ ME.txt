@@ -1,0 +1,1 @@
+exercise 38 from learning python the hard way
