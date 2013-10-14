@@ -2,7 +2,7 @@
 from sys import exit
 
 def start_room():
-    print """You are in your room. Your room on the space station epsilon.
+    print """You are in your room. Your room on the space station epsilon. 
     You have almost finished your tour here. Tomorrow relieve will arrive 
     and you will return home again"""
     print """But you do not feel relieved. You are on edge. You feel 
@@ -28,8 +28,14 @@ def start_room():
         
 
 def death():
-    print "death"
-    exit(0)
+    print "You choose wrongly"
+    print "Continue?"
+    next = raw_input("y/n? ")
+    
+    if next.lower() == "y":
+        start_room()
+    else:
+        exit(0)
 
 start_room()
-        
+
