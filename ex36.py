@@ -20,19 +20,23 @@ def start_room():
     elif int(next) == 2:
         corridor()
     else:
-        print "Wrong choice"
-        exit(0)
+        wrong_choice()
 
 
 def death():
-    print "You choose wrongly"
-    print "Continue?"
+    print "Oops!"
+    print "Try again?"
     next = raw_input("y/n? ")
     
     if next.lower() == "y":
         start_room()
     else:
         exit(0)
+
+
+def wrong_choice():
+    print "Wrong choice"
+    exit(0)
 
 
 def corridor():
@@ -50,14 +54,43 @@ def corridor():
     if int(next) == 1:
         death()
     elif int(next) == 2:
-        print "You choose 2"
-        #escape_pod()
+        escape_pod()
     elif int(next) == 3:
         print "You choose 3"
         #engineering()
     else:
-        print "Wrong choice"
-        exit(0)
+        wrong_choice()
 
 
+def escape_pod():
+    print "When you aproach the escape pod you notice the status lights."
+    print "It doesn't bode well. Both the oxygen and power lights are red\
+ and blinking."
+    
+    print "\nWhat will you do?"
+    print "Use the escape pod. 1)"
+    print "Go back to the corridor. 2)"
+    next = raw_input(">... ")
+    
+    if int(next) == 1:
+        death()
+    elif int(next) == 2:
+        corridor()
+    else:
+        wrong_choice()
+
+
+def engineering():
+    print "Engineering is a mess. Most controls are damaged and it is defenitly\
+ colder here than back in the corridor"
+    print "You can see the panels for monitoring enviromental and power levels"
+    print "Both oxygen and power levels show up in the red"
+    print "Turning around you notice toolkit. That could be quite handy for\
+ repairs"
+    print "
+    
+    print "\nWhat will you do?"
+    print "Go to enviromental controls. 1)"
+    print "Go to 
+    
 start_room()
