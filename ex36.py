@@ -83,14 +83,55 @@ def escape_pod():
 def engineering():
     print "Engineering is a mess. Most controls are damaged and it is defenitly\
  colder here than back in the corridor"
-    print "You can see the panels for monitoring enviromental and power levels"
-    print "Both oxygen and power levels show up in the red"
-    print "Turning around you notice toolkit. That could be quite handy for\
+    print "Thankfully you can see the monitor for enviromental and power levels\
+ is still working"
+    print "Turning around you notice a toolkit. That could be quite handy for\
  repairs"
-    print "
+    print "At the back of the room there is the exit to enviromental controls\
+ and on the left is the passage that leads to the power conduit"
+
+    print "\nWhat will you do?"    
+    print "Look at the monitor. 1)"
+    print "Take toolkit. 2)"
+    print "Go to enviromental controls. 3)"
+    print "Go to passage. 4)"
+    print "Go to back to the corridor. 5)"
+    next = raw_input(">... ")
     
-    print "\nWhat will you do?"
-    print "Go to enviromental controls. 1)"
-    print "Go to 
+    if int(next) == 1:
+        monitor()
+    elif int(next) == 2:
+        toolkit()
+    elif int(next) == 3:
+        enviromental_controls()
+    elif int(next) == 4:
+        passage()
+    elif int(next) == 5:
+        corridor()
+    else:
+        wrong_choice()
     
+
+def monitor():
+    print "The monitor shows both the oxygen and the power levels are way below\
+ optimal"
+    engineering()
+
+
+def toolkit():
+    print "you took the toolkit"
+    engineering()
+
+
+def enviromental_controls():
+    print "enviromental controls"
+    engineering()
+
+
+def passage():
+    print "passage"
+    engineering()
+
+
+
 start_room()
