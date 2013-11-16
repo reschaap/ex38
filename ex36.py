@@ -56,8 +56,7 @@ def corridor():
     elif int(next) == 2:
         escape_pod()
     elif int(next) == 3:
-        print "You choose 3"
-        #engineering()
+        engineering()
     else:
         wrong_choice()
 
@@ -86,9 +85,9 @@ def engineering():
     print "Thankfully you can see the monitor for enviromental and power levels\
  is still working"
     print "Turning around you notice a toolkit. That could be quite handy for\
- repairs"
+ repairs."
     print "At the back of the room there is the exit to enviromental controls\
- and on the left is the passage that leads to the power conduit"
+ and on the left is the passage that leads to the power conduit."
 
     print "\nWhat will you do?"    
     print "Look at the monitor. 1)"
@@ -114,23 +113,50 @@ def engineering():
 
 def monitor():
     print "The monitor shows both the oxygen and the power levels are way below\
- optimal"
+ optimal\n"
     engineering()
 
 
 def toolkit():
-    print "you took the toolkit"
+    print "You took the toolkit\n"
     engineering()
 
 
 def enviromental_controls():
-    print "enviromental controls"
-    engineering()
+    print "Enviromental controls is in a pretty good state. You use the\
+ diagnostic panel and can see the reason for the low oxygen levels"
+    print "The air scrubber is not working anymore and needs to be reset"
+    print "When you look away from the panel you notice an enviromental suit\
+ hanging of the wall"
+    
+    print "\nWhat will you do?"
+    print "Reset the air scrubber. 1)"
+    print "Take the enviromental suit. 2)"
+    print "Go back to engineering. 3)"
+    next = raw_input(">... ")
+    
+    if int(next) == 1:
+        air_scrubber()
+    elif int(next) == 2:
+        print "You took the enviromental suit\n"
+        enviromental_controls()
+    elif int(next) == 3:
+        engineering()
+    else:
+        wrong_choice()
+
+
+def air_scrubber():
+    print "You try to reset the air scrubber however the diagnostic panel shows\
+ there is not enough power\n"
+    enviromental_controls()
 
 
 def passage():
-    print "passage"
-    engineering()
+    print "You try to use the passage but as soon as you enter you notice you\
+ can't breathe. Before you pass out you finally notice the hull is damaged and\
+ you can see space through the hole"
+    death()
 
 
 
