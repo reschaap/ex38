@@ -1,42 +1,65 @@
 from sys import exit
 
-def start_room():
-    print """You are in your room. Your room on the space station epsilon. 
-    You have almost finished your tour here. Tomorrow relieve will arrive 
-    and you will return home again"""
-    print """But you do not feel relieved. You are on edge. You feel 
-    like something bad is just around the corner"""
-    print """All of a sudden there is a crash. You are pushed out of
-    your chair and you head hits the bulk head."""
-    print """You open your eyes and look around. The lights have dimmed.\n"""
+cls = 50 * "\n"
+
+
+def start_room(died=0):
+    if died == 0:
+        print cls
+        print "You are in your room. Your room on the space station epsilon.\
+ You have almost finished your tour here. Tomorrow relieve will arrive\
+ and you will return home again"
+        print "But you do not feel relieved. You are on edge. You feel\
+ like something bad is just around the corner"
+        print "All of a sudden there is a crash. You are pushed out of\
+ your chair and you head hits the bulk head."
+        print "You open your eyes and look around. The lights have dimmed."
+    else:
+        print cls
+        print "You open your eyes and look around. There is a feeling of deja\
+ vu, like you have been through this before."
         
-    print "What will you do?"
+    print "\nWhat will you do?"
     print "Stay here. 1)"
     print "Go to the corridor. 2)\n" 
     next = raw_input(">... ")
    
-    if int(next) == 1:
-        death()
-    elif int(next) == 2:
-        corridor()
-    else:
-        wrong_choice()
+    try:
+        if int(next) == 1:
+            death("You thought staying put would be safest, but it only postponed\
+ the inevitable. With oxygen and power levels being drained you eventually\
+ lose consciousness")
+        elif int(next) == 2:
+            corridor()
+        else:
+            print "wrong"
+            #wrong_choice(start_room(died))
+    except:
+        print "wrong input"
+        exit(0)
 
 
-def death():
-    print "Oops!"
-    print "Try again?"
+def death(text):
+    died = 1
+    print cls
+    print text
+    print "\nTry again?"
     next = raw_input("y/n? ")
     
     if next.lower() == "y":
-        start_room()
+        start_room(died)
     else:
         exit(0)
 
 
-def wrong_choice():
-    print "Wrong choice"
-    exit(0)
+def wrong_choice(location):
+    print "\nWrong choice"
+    print "\nTry again?"
+    next = raw_input("y/n? ")
+    
+    if next.lower() == "y":
+        location
+    
 
 
 def corridor():
@@ -158,6 +181,20 @@ def passage():
  you can see space through the hole"
     death()
 
+
+def power_conduit():
+    print "You arrived at the power conduit and can see the repairs that need\
+ to be done."
+
+    print "\nWhat will you do?"
+    print "Fix the power conduit. 1)"
+    print "Go back to engineering. 2)"
+    next = raw_input(">... ")
+    
+    if int(next) == 1:
+        print "The power conduit is fixed. Power should be restored."
+    elif int(next) == 2:
+        engineering()
 
 
 start_room()
