@@ -1,9 +1,9 @@
-from sys import exit
+from sys import exit, exc_info
 
 cls = 50 * "\n"
 
 
-def start_room(died=0):
+def start_room(died = 0):
     if died == 0:
         print cls
         print "You are in your room. Your room on the space station epsilon.\
@@ -16,8 +16,8 @@ def start_room(died=0):
         print "You open your eyes and look around. The lights have dimmed."
     else:
         print cls
-        print "You open your eyes and look around. There is a feeling of deja\
- vu, like you have been through this before."
+        print "You open your eyes and look around. You are back in your room.\
+ There is a feeling of deja vu, like you have been through this before."
         
     print "\nWhat will you do?"
     print "Stay here. 1)"
@@ -32,11 +32,25 @@ def start_room(died=0):
         elif int(next) == 2:
             corridor()
         else:
-            print "wrong"
-            #wrong_choice(start_room(died))
+            print "\nWrong choice"
+            print "\nTry again?"
+            next = raw_input("y/n? ")
+            
+            if next.lower() == "y":
+                start_room(died)
+            else:
+                print "\nGoodbye"
+                exit(0)
+    
+    except ValueError:
+        print "Number please."
+    
+    except SystemExit:
+        print "\nExiting..."
+        
     except:
-        print "wrong input"
-        exit(0)
+        print "No idea what went wrong: ", exc_info()[0]
+        raise
 
 
 def death(text):
@@ -52,17 +66,19 @@ def death(text):
         exit(0)
 
 
-def wrong_choice(location):
+def wrong_choice():
     print "\nWrong choice"
     print "\nTry again?"
     next = raw_input("y/n? ")
     
     if next.lower() == "y":
-        location
-    
+        start_room()
+    else:
+        exit(0)
 
 
 def corridor():
+    print cls
     print "You leave your room and look around. You notice it is as dark as it\
  was back in the room. The only light comes the red emergency lights."
     print "On your right you see the escape pod while in front of you there is\
@@ -74,14 +90,33 @@ def corridor():
     print "Go to engineering. 3)"
     next = raw_input(">... ")
     
-    if int(next) == 1:
-        death()
-    elif int(next) == 2:
-        escape_pod()
-    elif int(next) == 3:
-        engineering()
-    else:
-        wrong_choice()
+    try:
+        if int(next) == 1:
+            death("\nYour room was not the safest choice afterall. With oxygen\
+ and power levels being drained you eventually lose consciousness.")
+        elif int(next) == 2:
+            escape_pod()
+        elif int(next) == 3:
+            engineering()
+        else:
+            print "\nWrong choice."
+            print "\nTry again?"
+            next = raw_input("y/n? ")
+            
+            if next.lower() == "y":
+                corridor()
+            else:
+                exit(0)
+    
+    except ValueError:
+        print "Number please."
+    
+    except SystemExit:
+        print "\nExiting..."
+        
+    except:
+        print "No idea what went wrong: ", exc_info()[0]
+        raise
 
 
 def escape_pod():
