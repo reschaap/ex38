@@ -32,15 +32,8 @@ def start_room(died = 0):
         elif int(next) == 2:
             corridor()
         else:
-            print "\nWrong choice"
-            print "\nTry again?"
-            next = raw_input("y/n? ")
-            
-            if next.lower() == "y":
-                start_room(died)
-            else:
-                print "\nGoodbye"
-                exit(0)
+            wrong_choice()
+            start_room(died)
     
     except ValueError:
         print "Number please."
@@ -72,7 +65,7 @@ def wrong_choice():
     next = raw_input("y/n? ")
     
     if next.lower() == "y":
-        start_room()
+        return
     else:
         exit(0)
 
@@ -99,14 +92,8 @@ def corridor():
         elif int(next) == 3:
             engineering()
         else:
-            print "\nWrong choice."
-            print "\nTry again?"
-            next = raw_input("y/n? ")
-            
-            if next.lower() == "y":
-                corridor()
-            else:
-                exit(0)
+            wrong_choice()
+            corridor()
     
     except ValueError:
         print "Number please."
@@ -120,6 +107,7 @@ def corridor():
 
 
 def escape_pod():
+    print cls
     print "When you aproach the escape pod you notice the status lights."
     print "It doesn't bode well. Both the oxygen and power lights are red\
  and blinking."
@@ -129,15 +117,30 @@ def escape_pod():
     print "Go back to the corridor. 2)"
     next = raw_input(">... ")
     
-    if int(next) == 1:
-        death()
-    elif int(next) == 2:
-        corridor()
-    else:
-        wrong_choice()
+    try:
+        if int(next) == 1:
+            death("You enter the escape pod and using the last remaining\
+ power you launch from the station. However without enough power or oxygen you\
+ do not make it very far.")
+        elif int(next) == 2:
+            corridor()
+        else:
+            wrong_choice()
+            escape_pod()
+    
+    except ValueError:
+        print "Number please."
+    
+    except SystemExit:
+        print "\nExiting..."
+    
+    except:
+        print "No idea what went wrong: ", exc_info()[0]
+        raise
 
 
 def engineering():
+    print cls
     print "Engineering is a mess. Most controls are damaged and it is defenitly\
  colder here than back in the corridor"
     print "Thankfully you can see the monitor for enviromental and power levels\
@@ -155,23 +158,37 @@ def engineering():
     print "Go to back to the corridor. 5)"
     next = raw_input(">... ")
     
-    if int(next) == 1:
-        monitor()
-    elif int(next) == 2:
-        toolkit()
-    elif int(next) == 3:
-        enviromental_controls()
-    elif int(next) == 4:
-        passage()
-    elif int(next) == 5:
-        corridor()
-    else:
-        wrong_choice()
+    try:
+        if int(next) == 1:
+            monitor()
+        elif int(next) == 2:
+            toolkit()
+        elif int(next) == 3:
+            enviromental_controls()
+        elif int(next) == 4:
+            death("You try to use the passage but as soon as you enter you\
+ notice you can't breathe. Before you pass out you finally notice the hull is\
+ damaged and you can see space through the hole")
+        elif int(next) == 5:
+            corridor()
+        else:
+            wrong_choice()
+            engineering()
+    
+    except ValueError:
+        print "Number please."
+        
+    except SystemExit:
+        print "\nExiting..."
+    
+    except:
+        print "No idea what went wrong: ", exc_info()[0]
+        raise
     
 
 def monitor():
     print "The monitor shows both the oxygen and the power levels are way below\
- optimal\n"
+ optimal.\n"
     engineering()
 
 
@@ -181,6 +198,7 @@ def toolkit():
 
 
 def enviromental_controls():
+    print cls
     print "Enviromental controls is in a pretty good state. You use the\
  diagnostic panel and can see the reason for the low oxygen levels"
     print "The air scrubber is not working anymore and needs to be reset"
@@ -193,28 +211,33 @@ def enviromental_controls():
     print "Go back to engineering. 3)"
     next = raw_input(">... ")
     
-    if int(next) == 1:
-        air_scrubber()
-    elif int(next) == 2:
-        print "You took the enviromental suit\n"
-        enviromental_controls()
-    elif int(next) == 3:
-        engineering()
-    else:
-        wrong_choice()
+    try:
+        if int(next) == 1:
+            air_scrubber()
+        elif int(next) == 2:
+            print "You took the enviromental suit\n"
+            enviromental_controls()
+        elif int(next) == 3:
+            engineering()
+        else:
+            wrong_choice()
+            enviromental_controls()
+    
+    except ValueError:
+        print "Number please."
+    
+    except SystemExit:
+        print "Exiting..."
+    
+    except:
+        print "No idea what went wrong: ", exc_info()[0]
+        raise
 
 
 def air_scrubber():
     print "You try to reset the air scrubber however the diagnostic panel shows\
  there is not enough power\n"
     enviromental_controls()
-
-
-def passage():
-    print "You try to use the passage but as soon as you enter you notice you\
- can't breathe. Before you pass out you finally notice the hull is damaged and\
- you can see space through the hole"
-    death()
 
 
 def power_conduit():
